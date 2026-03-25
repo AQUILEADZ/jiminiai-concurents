@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JIMINI.AI — Mindmap Angles Marketing</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a12; color: #e0e0e0; overflow: hidden; width: 100vw; height: 100vh; }
+
+  svg { width: 100%; height: 100%; }
+
+  .node-group { cursor: pointer; }
+  .node-group:hover .node-rect { filter: brightness(1.15); }
+  .node-group:hover .node-text { fill: #fff; }
+
+  /* Legend */
+  .legend { position: fixed; bottom: 20px; left: 20px; background: rgba(20,20,35,0.9); border: 1px solid #333; border-radius: 12px; padding: 16px 20px; font-size: 12px; z-index: 10; }
+  .legend h4 { color: #888; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  .title-bar { position: fixed; top: 0; left: 0; right: 0; background: rgba(10,10,18,0.95); border-bottom: 1px solid #222; padding: 14px 24px; z-index: 10; display: flex; align-items: center; justify-content: space-between; }
+  .title-bar h1 { font-size: 16px; font-weight: 700; color: #fff; }
+  .title-bar span { font-size: 12px; color: #666; }
+</style>
+</head>
+<body>
+
+<div class="title-bar">
+  <h1>JIMINI.AI — 3 Angles Marketing × Guides & Webinaires</h1>
+  <span>Aquilead • Mars 2026</span>
+</div>
+
+<div class="legend">
+  <h4>Légende</h4>
+  <div class="legend-item"><div class="legend-dot" style="background:#2E75B6"></div> Centre stratégie</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#E85D3A"></div> Angle 1 — Productivité</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2AAF6D"></div> Angle 2 — Sécurité</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#A855F7"></div> Angle 3 — Compétitivité</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div> Guide gratuit</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#06B6D4"></div> Webinaire</div>
+</div>
+
+<svg id="mindmap" viewBox="0 0 1600 1000">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <linearGradient id="grad-prod" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E85D3A;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#E85D3A;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="grad-secu" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2AAF6D;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#2AAF6D;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="grad-compet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A855F7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#A855F7;stop-opacity:0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background zones -->
+  <ellipse cx="500" cy="380" rx="380" ry="320" fill="url(#grad-prod)" opacity="0.4"/>
+  <ellipse cx="1100" cy="280" rx="380" ry="280" fill="url(#grad-secu)" opacity="0.4"/>
+  <ellipse cx="1050" cy="740" rx="400" ry="260" fill="url(#grad-compet)" opacity="0.4"/>
+
+  <!-- === CONNECTIONS FROM CENTER === -->
+  <!-- Center to Angle 1 (Productivité) -->
+  <path d="M 800,500 C 700,480 600,400 500,340" stroke="#E85D3A" stroke-width="3" fill="none" opacity="0.6"/>
+  <!-- Center to Angle 2 (Sécurité) -->
+  <path d="M 800,500 C 900,420 1000,340 1080,260" stroke="#2AAF6D" stroke-width="3" fill="none" opacity="0.6"/>
+  <!-- Center to Angle 3 (Compétitivité) -->
+  <path d="M 800,500 C 880,580 950,650 1020,700" stroke="#A855F7" stroke-width="3" fill="none" opacity="0.6"/>
+
+  <!-- === ANGLE 1: PRODUCTIVITÉ — Connections to guides/webinaires === -->
+  <!-- to Guide 7 Tâches -->
+  <path d="M 500,340 C 420,340 350,330 240,280" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Guide 5 Réflexes -->
+  <path d="M 500,340 C 400,380 320,420 220,440" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Webinaire Prise en main -->
+  <path d="M 500,340 C 440,280 400,220 350,160" stroke="#06B6D4" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Webinaire Outils -->
+  <path d="M 500,340 C 520,420 540,500 520,570" stroke="#06B6D4" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Guide Checklist 30j -->
+  <path d="M 500,340 C 550,460 560,540 540,660" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+
+  <!-- === ANGLE 2: SÉCURITÉ — Connections === -->
+  <!-- to Guide IA & Secret Pro -->
+  <path d="M 1080,260 C 1120,200 1160,160 1220,120" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Guide Comparatif ChatGPT -->
+  <path d="M 1080,260 C 1160,260 1240,260 1310,240" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Webinaire Spécialités (sécurité par domaine) -->
+  <path d="M 1080,260 C 1100,320 1120,380 1160,420" stroke="#06B6D4" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Webinaire Prise en main (also security demo) -->
+  <path d="M 1080,260 C 900,240 600,200 350,160" stroke="#06B6D4" stroke-width="1.5" fill="none" opacity="0.25" stroke-dasharray="4,4"/>
+
+  <!-- === ANGLE 3: COMPÉTITIVITÉ — Connections === -->
+  <!-- to Guide 7 Erreurs -->
+  <path d="M 1020,700 C 1080,650 1160,620 1260,600" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Guide Rentabilité Cabinet -->
+  <path d="M 1020,700 C 1100,740 1180,760 1260,770" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Webinaire Nouveautés 2026 -->
+  <path d="M 1020,700 C 1060,780 1100,840 1160,880" stroke="#06B6D4" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+  <!-- to Webinaire Spécialités -->
+  <path d="M 1020,700 C 1060,620 1100,520 1160,420" stroke="#06B6D4" stroke-width="1.5" fill="none" opacity="0.25" stroke-dasharray="4,4"/>
+  <!-- to Guide 5 Réflexes (also compet) -->
+  <path d="M 1020,700 C 800,650 500,550 220,440" stroke="#F59E0B" stroke-width="1.5" fill="none" opacity="0.2" stroke-dasharray="4,4"/>
+
+  <!-- ========================================= -->
+  <!-- CENTER NODE -->
+  <!-- ========================================= -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="710" y="464" width="180" height="72" rx="14" fill="#1A3C6E" stroke="#2E75B6" stroke-width="2.5" class="node-rect"/>
+    <text x="800" y="492" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" class="node-text">JIMINI.AI</text>
+    <text x="800" y="512" text-anchor="middle" fill="#8BAFD4" font-size="10" font-weight="500">Stratégie Lead Gen</text>
+    <text x="800" y="526" text-anchor="middle" fill="#5A7FA8" font-size="9" font-weight="400">Cible : Avocats & Dir. Juridiques</text>
+  </g>
+
+  <!-- ========================================= -->
+  <!-- ANGLE 1: PRODUCTIVITÉ -->
+  <!-- ========================================= -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="390" y="300" width="220" height="80" rx="12" fill="#1C1210" stroke="#E85D3A" stroke-width="2" class="node-rect"/>
+    <text x="500" y="326" text-anchor="middle" fill="#E85D3A" font-size="11" font-weight="700" letter-spacing="1">ANGLE 1</text>
+    <text x="500" y="346" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" class="node-text">PRODUCTIVITÉ</text>
+    <text x="500" y="366" text-anchor="middle" fill="#B08060" font-size="9">44h/mois • +5 dossiers • 20 min vs 3h</text>
+  </g>
+
+  <!-- Guide: 7 Tâches -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="100" y="248" width="260" height="60" rx="10" fill="#1A1508" stroke="#F59E0B" stroke-width="1.5" class="node-rect"/>
+    <text x="115" y="270" fill="#F59E0B" font-size="9" font-weight="600">GUIDE</text>
+    <text x="115" y="287" fill="#fff" font-size="12" font-weight="600" class="node-text">7 Tâches juridiques à automatiser</text>
+    <text x="115" y="300" fill="#A0882E" font-size="8">"Jimini fait en 20 min ce qui prenait une demi-journée"</text>
+  </g>
+
+  <!-- Guide: 5 Réflexes IA -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="80" y="408" width="260" height="60" rx="10" fill="#1A1508" stroke="#F59E0B" stroke-width="1.5" class="node-rect"/>
+    <text x="95" y="430" fill="#F59E0B" font-size="9" font-weight="600">GUIDE</text>
+    <text x="95" y="447" fill="#fff" font-size="12" font-weight="600" class="node-text">5 Réflexes IA pour votre cabinet</text>
+    <text x="95" y="460" fill="#A0882E" font-size="8">"+5 dossiers supplémentaires par mois sans recruter"</text>
+  </g>
+
+  <!-- Guide: Checklist 30 jours -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="400" y="630" width="280" height="60" rx="10" fill="#1A1508" stroke="#F59E0B" stroke-width="1.5" class="node-rect"/>
+    <text x="415" y="652" fill="#F59E0B" font-size="9" font-weight="600">GUIDE (NOUVEAU)</text>
+    <text x="415" y="669" fill="#fff" font-size="12" font-weight="600" class="node-text">Checklist : Préparer votre cabinet</text>
+    <text x="415" y="682" fill="#A0882E" font-size="8">à l'IA en 30 jours — Format opérationnel pas-à-pas</text>
+  </g>
+
+  <!-- Webinaire: Prise en main -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="200" y="125" width="280" height="60" rx="10" fill="#081518" stroke="#06B6D4" stroke-width="1.5" class="node-rect"/>
+    <text x="215" y="147" fill="#06B6D4" font-size="9" font-weight="600">WEBINAIRE — Chaque mardi 11h30</text>
+    <text x="215" y="164" fill="#fff" font-size="12" font-weight="600" class="node-text">Prise en main : Démo live & Q&A</text>
+    <text x="215" y="177" fill="#4A9AAF" font-size="8">"Un contrat analysé en 20 min au lieu d'une demi-journée"</text>
+  </g>
+
+  <!-- Webinaire: Outils -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="370" y="540" width="290" height="60" rx="10" fill="#081518" stroke="#06B6D4" stroke-width="1.5" class="node-rect"/>
+    <text x="385" y="562" fill="#06B6D4" font-size="9" font-weight="600">WEBINAIRE — Par outil</text>
+    <text x="385" y="579" fill="#fff" font-size="12" font-weight="600" class="node-text">Analyse docs, Grille, Publipostage, Word</text>
+    <text x="385" y="592" fill="#4A9AAF" font-size="8">"Chaque outil vous fait gagner des heures"</text>
+  </g>
+
+  <!-- ========================================= -->
+  <!-- ANGLE 2: SÉCURITÉ / SOUVERAINETÉ -->
+  <!-- ========================================= -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="970" y="220" width="220" height="80" rx="12" fill="#0C1A12" stroke="#2AAF6D" stroke-width="2" class="node-rect"/>
+    <text x="1080" y="246" text-anchor="middle" fill="#2AAF6D" font-size="11" font-weight="700" letter-spacing="1">ANGLE 2</text>
+    <text x="1080" y="266" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" class="node-text">SÉCURITÉ</text>
+    <text x="1080" y="286" text-anchor="middle" fill="#609070" font-size="9">Souverain FR • ISO 27001 • RGPD • Secret Pro</text>
+  </g>
+
+  <!-- Guide: IA & Secret Pro -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="1100" y="88" width="280" height="60" rx="10" fill="#1A1508" stroke="#F59E0B" stroke-width="1.5" class="node-rect"/>
+    <text x="1115" y="110" fill="#F59E0B" font-size="9" font-weight="600">GUIDE</text>
+    <text x="1115" y="127" fill="#fff" font-size="12" font-weight="600" class="node-text">IA et Secret Professionnel</text>
+    <text x="1115" y="140" fill="#A0882E" font-size="8">"Vos dossiers méritent mieux qu'un serveur américain"</text>
+  </g>
+
+  <!-- Guide: Comparatif ChatGPT -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="1200" y="208" width="300" height="60" rx="10" fill="#1A1508" stroke="#F59E0B" stroke-width="1.5" class="node-rect"/>
+    <text x="1215" y="230" fill="#F59E0B" font-size="9" font-weight="600">GUIDE (NOUVEAU)</text>
+    <text x="1215" y="247" fill="#fff" font-size="12" font-weight="600" class="node-text">ChatGPT vs IA juridique : le vrai comparatif</text>
+    <text x="1215" y="260" fill="#A0882E" font-size="8">"Le comparatif que personne n'ose publier"</text>
+  </g>
+
+  <!-- Webinaire: Spécialités -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="1050" y="390" width="300" height="60" rx="10" fill="#081518" stroke="#06B6D4" stroke-width="1.5" class="node-rect"/>
+    <text x="1065" y="412" fill="#06B6D4" font-size="9" font-weight="600">WEBINAIRE — Par spécialité juridique</text>
+    <text x="1065" y="429" fill="#fff" font-size="12" font-weight="600" class="node-text">M&A, Contentieux, Social, Pénal, PI…</text>
+    <text x="1065" y="442" fill="#4A9AAF" font-size="8">"Votre spécialité. Vos dossiers. L'IA en renfort."</text>
+  </g>
+
+  <!-- ========================================= -->
+  <!-- ANGLE 3: COMPÉTITIVITÉ / FOMO -->
+  <!-- ========================================= -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="910" y="660" width="220" height="80" rx="12" fill="#160C1C" stroke="#A855F7" stroke-width="2" class="node-rect"/>
+    <text x="1020" y="686" text-anchor="middle" fill="#A855F7" font-size="11" font-weight="700" letter-spacing="1">ANGLE 3</text>
+    <text x="1020" y="706" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" class="node-text">COMPÉTITIVITÉ</text>
+    <text x="1020" y="726" text-anchor="middle" fill="#8060A0" font-size="9">FOMO • +3000 avocats • Rentabilité • Erreurs</text>
+  </g>
+
+  <!-- Guide: 7 Erreurs -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="1150" y="572" width="300" height="60" rx="10" fill="#1A1508" stroke="#F59E0B" stroke-width="1.5" class="node-rect"/>
+    <text x="1165" y="594" fill="#F59E0B" font-size="9" font-weight="600">GUIDE (NOUVEAU — FOMO)</text>
+    <text x="1165" y="611" fill="#fff" font-size="12" font-weight="600" class="node-text">7 Erreurs IA qui coûtent des dossiers</text>
+    <text x="1165" y="624" fill="#A0882E" font-size="8">"Ces erreurs peuvent coûter un dossier à votre cabinet"</text>
+  </g>
+
+  <!-- Guide: Rentabilité -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="1150" y="740" width="310" height="60" rx="10" fill="#1A1508" stroke="#F59E0B" stroke-width="1.5" class="node-rect"/>
+    <text x="1165" y="762" fill="#F59E0B" font-size="9" font-weight="600">GUIDE (NOUVEAU)</text>
+    <text x="1165" y="779" fill="#fff" font-size="12" font-weight="600" class="node-text">Le cabinet de demain : IA et rentabilité</text>
+    <text x="1165" y="792" fill="#A0882E" font-size="8">"Comment l'IA redessine la rentabilité des cabinets"</text>
+  </g>
+
+  <!-- Webinaire: Nouveautés 2026 -->
+  <g class="node-group" filter="url(#shadow)">
+    <rect x="1040" y="850" width="300" height="60" rx="10" fill="#081518" stroke="#06B6D4" stroke-width="1.5" class="node-rect"/>
+    <text x="1055" y="872" fill="#06B6D4" font-size="9" font-weight="600">WEBINAIRE — Événement produit</text>
+    <text x="1055" y="889" fill="#fff" font-size="12" font-weight="600" class="node-text">Nouveautés 2026 : vision et roadmap</text>
+    <text x="1055" y="902" fill="#4A9AAF" font-size="8">"Les cabinets qui bougent maintenant auront une longueur d'avance"</text>
+  </g>
+
+  <!-- ========================================= -->
+  <!-- KEY METRICS floating -->
+  <!-- ========================================= -->
+  <g opacity="0.5">
+    <text x="440" y="195" fill="#E85D3A" font-size="22" font-weight="800">44h</text>
+    <text x="485" y="195" fill="#E85D3A" font-size="10" font-weight="400">/mois</text>
+
+    <text x="700" y="610" fill="#A855F7" font-size="22" font-weight="800">+3000</text>
+    <text x="780" y="610" fill="#A855F7" font-size="10" font-weight="400">avocats</text>
+
+    <text x="1350" y="170" fill="#2AAF6D" font-size="22" font-weight="800">100%</text>
+    <text x="1400" y="185" fill="#2AAF6D" font-size="10" font-weight="400">souverain</text>
+
+    <text x="280" y="510" fill="#E85D3A" font-size="22" font-weight="800">+5</text>
+    <text x="310" y="510" fill="#E85D3A" font-size="10" font-weight="400">dossiers/mois</text>
+
+    <text x="850" y="820" fill="#A855F7" font-size="14" font-weight="700">FOMO</text>
+  </g>
+
+</svg>
+
+</body>
+</html>
