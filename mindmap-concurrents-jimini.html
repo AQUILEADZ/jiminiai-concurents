@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mind Map — Analyse Concurrentielle JIMINI.AI</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f1117; color: #e0e0e0; overflow: hidden; }
+
+  svg { width: 100vw; height: 100vh; }
+
+  .node-group { cursor: pointer; }
+  .node-group:hover .node-rect { filter: brightness(1.15); }
+  .node-group:hover .node-text { fill: #fff; }
+
+  .node-rect { rx: 12; ry: 12; stroke-width: 2; transition: filter 0.2s; }
+  .node-text { font-weight: 600; dominant-baseline: central; text-anchor: middle; }
+  .node-sub { font-weight: 400; font-size: 11px; fill: #b0b0b0; dominant-baseline: central; text-anchor: middle; }
+
+  .branch { fill: none; stroke-width: 2.5; stroke-linecap: round; opacity: 0.6; }
+  .sub-branch { fill: none; stroke-width: 1.8; stroke-linecap: round; opacity: 0.45; }
+
+  .badge { font-size: 10px; font-weight: 700; dominant-baseline: central; text-anchor: middle; }
+  .badge-bg { rx: 8; ry: 8; }
+
+  .legend { position: fixed; bottom: 20px; left: 20px; background: rgba(20,22,30,0.9); border: 1px solid #333; border-radius: 12px; padding: 16px 20px; font-size: 12px; color: #999; }
+  .legend h4 { color: #ccc; margin-bottom: 8px; font-size: 13px; }
+  .legend-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .title-bar { position: fixed; top: 0; left: 0; right: 0; padding: 16px 24px; background: linear-gradient(180deg, rgba(15,17,23,0.95) 0%, rgba(15,17,23,0) 100%); z-index: 10; }
+  .title-bar h1 { font-size: 18px; font-weight: 700; color: #fff; }
+  .title-bar p { font-size: 12px; color: #888; margin-top: 4px; }
+
+  .tooltip { position: fixed; background: rgba(25,28,38,0.96); border: 1px solid #444; border-radius: 10px; padding: 14px 18px; font-size: 12px; line-height: 1.6; max-width: 320px; pointer-events: none; opacity: 0; transition: opacity 0.2s; z-index: 100; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+  .tooltip.visible { opacity: 1; }
+  .tooltip h3 { font-size: 14px; color: #fff; margin-bottom: 6px; }
+  .tooltip .stat { color: #7dd3fc; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="title-bar">
+  <h1>Analyse Concurrentielle Ads — JIMINI.AI</h1>
+  <p>Mind map interactive — Mars 2026 — Survolez les noeuds pour plus de details</p>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<svg id="mindmap" viewBox="0 0 1400 900">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- BRANCHES PRINCIPALES depuis le centre -->
+  <!-- Meta -->
+  <path class="branch" stroke="#f472b6" d="M700,450 C550,450 480,200 350,200"/>
+  <!-- LinkedIn -->
+  <path class="branch" stroke="#60a5fa" d="M700,450 C550,450 480,650 350,680"/>
+  <!-- Google -->
+  <path class="branch" stroke="#34d399" d="M700,450 C850,450 920,200 1050,200"/>
+  <!-- Recos -->
+  <path class="branch" stroke="#fbbf24" d="M700,450 C850,450 920,680 1050,680"/>
+
+  <!-- SUB-BRANCHES Meta -->
+  <path class="sub-branch" stroke="#f472b6" d="M350,200 C280,200 220,120 160,110"/>
+  <path class="sub-branch" stroke="#f472b6" d="M350,200 C270,200 220,200 140,210"/>
+  <path class="sub-branch" stroke="#f472b6" d="M350,200 C280,200 220,290 160,310"/>
+
+  <!-- SUB-BRANCHES LinkedIn -->
+  <path class="sub-branch" stroke="#60a5fa" d="M350,680 C280,680 220,610 160,600"/>
+  <path class="sub-branch" stroke="#60a5fa" d="M350,680 C280,680 220,700 140,710"/>
+  <path class="sub-branch" stroke="#60a5fa" d="M350,680 C280,680 220,790 160,800"/>
+
+  <!-- SUB-BRANCHES Google -->
+  <path class="sub-branch" stroke="#34d399" d="M1050,200 C1120,200 1180,110 1240,100"/>
+  <path class="sub-branch" stroke="#34d399" d="M1050,200 C1120,200 1180,200 1260,200"/>
+  <path class="sub-branch" stroke="#34d399" d="M1050,200 C1120,200 1180,290 1240,300"/>
+
+  <!-- SUB-BRANCHES Recos -->
+  <path class="sub-branch" stroke="#fbbf24" d="M1050,680 C1120,680 1160,600 1220,590"/>
+  <path class="sub-branch" stroke="#fbbf24" d="M1050,680 C1120,680 1180,680 1240,680"/>
+  <path class="sub-branch" stroke="#fbbf24" d="M1050,680 C1120,680 1160,760 1220,775"/>
+
+  <!-- ============= NOEUD CENTRAL ============= -->
+  <g class="node-group" data-tooltip="<h3>JIMINI.AI</h3>Copilote IA souverain pour professionnels du droit<br><span class='stat'>175€/mois/user</span> — SaaS B2B<br>Cible : petits cabinets &lt;10 pers.<br>Budget ads : <span class='stat'>2k€/mois</span><br>0 campagne paid lancée à ce jour">
+    <rect class="node-rect" x="620" y="410" width="160" height="80" fill="#6d28d9" stroke="#a78bfa" filter="url(#glow)"/>
+    <text class="node-text" x="700" y="442" fill="#fff" font-size="16">JIMINI.AI</text>
+    <text class="node-sub" x="700" y="468" fill="#c4b5fd">Analyse concurrentielle</text>
+  </g>
+
+  <!-- ============= META ============= -->
+  <g class="node-group" data-tooltip="<h3>META (Facebook / Instagram)</h3><span class='stat'>Haiku = 71 pubs</span> — leader inconteste<br>Doctrine = 2-3 pubs actives<br>Legora = 4 pubs (anglais)<br>Ordalie &amp; Harvey = 0 pub">
+    <rect class="node-rect" x="280" y="172" width="140" height="56" fill="#831843" stroke="#f472b6"/>
+    <text class="node-text" x="350" y="200" fill="#fce7f3" font-size="14">META</text>
+  </g>
+
+  <!-- Haiku - Meta -->
+  <g class="node-group" data-tooltip="<h3>Haiku Legal — Meta</h3><span class='stat'>71 pubs actives</span><br><br>Angles :<br>• Urgence/FOMO : 'C'est maintenant ou jamais'<br>• Gain de temps : 'Dossiers en 1h au lieu de 3h30'<br>• vs ChatGPT : 'Pas penser comme un avocat'<br>• Valorisation metier : 'Pas remplir des Excel'<br><br>Formats : video temoignage + statiques + webinaires<br>CTA : Essai gratuit, 100% securise">
+    <rect class="node-rect" x="60" y="84" width="200" height="52" fill="#1e1e2e" stroke="#f472b6"/>
+    <text class="node-text" x="160" y="104" fill="#f9a8d4" font-size="12">Haiku Legal</text>
+    <rect class="badge-bg" x="116" y="114" width="88" height="18" fill="#be185d"/>
+    <text class="badge" x="160" y="123" fill="#fff">71 pubs</text>
+  </g>
+
+  <!-- Doctrine - Meta -->
+  <g class="node-group" data-tooltip="<h3>Doctrine.fr — Meta</h3><span class='stat'>2-3 pubs actives</span><br><br>Angles :<br>• Gestion contractuelle chronophage (56%)<br>• Guides IA &amp; contrats<br>• Visuels sombres/pro<br><br>Strategie discret sur Meta, focus LinkedIn">
+    <rect class="node-rect" x="40" y="184" width="200" height="52" fill="#1e1e2e" stroke="#f472b6"/>
+    <text class="node-text" x="140" y="204" fill="#f9a8d4" font-size="12">Doctrine.fr</text>
+    <rect class="badge-bg" x="102" y="214" width="76" height="18" fill="#6b2140"/>
+    <text class="badge" x="140" y="223" fill="#f9a8d4">2-3 pubs</text>
+  </g>
+
+  <!-- Autres - Meta -->
+  <g class="node-group" data-tooltip="<h3>Autres concurrents — Meta</h3>Legora : 4 pubs (anglais, ciblage US/Suisse)<br>Ordalie : 0 pub active<br>Harvey AI : 0 pub active<br><br>=> Peu de competition directe hormis Haiku">
+    <rect class="node-rect" x="52" y="286" width="218" height="48" fill="#1e1e2e" stroke="#f472b680"/>
+    <text class="node-text" x="161" y="310" fill="#888" font-size="11">Ordalie / Harvey / Legora</text>
+    <rect class="badge-bg" x="125" y="286" width="72" height="18" fill="#333"/>
+    <text class="badge" x="161" y="295" fill="#888">0 pub FR</text>
+  </g>
+
+  <!-- ============= LINKEDIN ============= -->
+  <g class="node-group" data-tooltip="<h3>LINKEDIN Ads</h3><span class='stat'>Legora = 2533 pubs</span> (international)<br><span class='stat'>Doctrine = 579 pubs</span> (FR/IT/DE)<br>Haiku, Ordalie, Harvey = 0 pub">
+    <rect class="node-rect" x="280" y="652" width="140" height="56" fill="#1e3a5f" stroke="#60a5fa"/>
+    <text class="node-text" x="350" y="680" fill="#bfdbfe" font-size="14">LINKEDIN</text>
+  </g>
+
+  <!-- Doctrine - LinkedIn -->
+  <g class="node-group" data-tooltip="<h3>Doctrine — LinkedIn</h3><span class='stat'>579 pubs</span><br><br>Strategie lead magnet :<br>• Guides PDF (5 erreurs IA, gestion contrats)<br>• Webinaires en direct<br>• Pubs multilingues (FR/IT/DE)<br>• Angles : productivite, confiance IA<br><br>Format : Document ads + Event ads">
+    <rect class="node-rect" x="40" y="574" width="230" height="52" fill="#1e1e2e" stroke="#60a5fa"/>
+    <text class="node-text" x="155" y="594" fill="#93c5fd" font-size="12">Doctrine</text>
+    <rect class="badge-bg" x="108" y="604" width="94" height="18" fill="#1d4ed8"/>
+    <text class="badge" x="155" y="613" fill="#fff">579 pubs</text>
+  </g>
+
+  <!-- Legora - LinkedIn -->
+  <g class="node-group" data-tooltip="<h3>Legora — LinkedIn</h3><span class='stat'>2 533 pubs</span><br><br>Strategie thought leadership :<br>• Presse (Bloomberg TV)<br>• Acquisitions (Walter AI)<br>• Partenariats (NKF Suisse)<br>• '2026: Year of Agents in Legal AI'<br><br>Ciblage grands comptes internationaux<br>Moins pertinent pour cible Jimini">
+    <rect class="node-rect" x="30" y="684" width="220" height="52" fill="#1e1e2e" stroke="#60a5fa"/>
+    <text class="node-text" x="140" y="704" fill="#93c5fd" font-size="12">Legora</text>
+    <rect class="badge-bg" x="86" y="714" width="108" height="18" fill="#1d4ed8"/>
+    <text class="badge" x="140" y="723" fill="#fff">2 533 pubs</text>
+  </g>
+
+  <!-- Autres - LinkedIn -->
+  <g class="node-group" data-tooltip="<h3>Autres — LinkedIn</h3>Haiku Legal : 0 pub<br>Ordalie : 0 pub<br>Harvey AI : 0 pub<br><br>=> Opportunite pour Jimini de se positionner<br>sans competition directe mid-market FR">
+    <rect class="node-rect" x="42" y="776" width="228" height="48" fill="#1e1e2e" stroke="#60a5fa80"/>
+    <text class="node-text" x="156" y="800" fill="#888" font-size="11">Haiku / Ordalie / Harvey</text>
+    <rect class="badge-bg" x="120" y="776" width="72" height="18" fill="#333"/>
+    <text class="badge" x="156" y="785" fill="#888">0 pub</text>
+  </g>
+
+  <!-- ============= GOOGLE ADS ============= -->
+  <g class="node-group" data-tooltip="<h3>GOOGLE ADS</h3><span class='stat'>Doctrine = 56 annonces</span><br><span class='stat'>Haiku = 31 annonces</span><br><span class='stat'>Ordalie = 6 annonces</span><br>Harvey = 0 (pas en FR)">
+    <rect class="node-rect" x="980" y="172" width="140" height="56" fill="#064e3b" stroke="#34d399"/>
+    <text class="node-text" x="1050" y="200" fill="#a7f3d0" font-size="14">GOOGLE ADS</text>
+  </g>
+
+  <!-- Doctrine - Google -->
+  <g class="node-group" data-tooltip="<h3>Doctrine — Google Ads</h3><span class='stat'>56 annonces</span><br><br>Search Ads :<br>• 'Accelerez vos consultations - IA pour juristes'<br>• 'L intelligence juridique'<br>• '7000+ avocats et juristes'<br>• Sitelinks : Directions juridiques, Fonctionnalites IA<br><br>Annonceur : Forseti SAS">
+    <rect class="node-rect" x="1140" y="72" width="220" height="52" fill="#1e1e2e" stroke="#34d399"/>
+    <text class="node-text" x="1250" y="92" fill="#6ee7b7" font-size="12">Doctrine.fr</text>
+    <rect class="badge-bg" x="1202" y="102" width="96" height="18" fill="#065f46"/>
+    <text class="badge" x="1250" y="111" fill="#fff">56 annonces</text>
+  </g>
+
+  <!-- Haiku - Google -->
+  <g class="node-group" data-tooltip="<h3>Haiku — Google Ads</h3><span class='stat'>31 annonces</span><br><br>Search Ads :<br>• 'IA au Service du Droit - Assistant IA Juridique'<br>• '30 Jours d Essai Gratuit'<br>• Sitelinks : Les Tarifs, Le Contact, Reservez Une Demo<br><br>+ Videos YouTube sponsorisees<br>Annonceur : Clerk">
+    <rect class="node-rect" x="1158" y="174" width="204" height="52" fill="#1e1e2e" stroke="#34d399"/>
+    <text class="node-text" x="1260" y="194" fill="#6ee7b7" font-size="12">Haiku.fr</text>
+    <rect class="badge-bg" x="1212" y="204" width="96" height="18" fill="#065f46"/>
+    <text class="badge" x="1260" y="213" fill="#fff">31 annonces</text>
+  </g>
+
+  <!-- Ordalie - Google -->
+  <g class="node-group" data-tooltip="<h3>Ordalie — Google Ads</h3><span class='stat'>6 annonces</span><br><br>Search + Display :<br>• 'Ordalie - IA Juridique'<br>• 'L IA juridique francaise'<br>• 'Zero hallucination, sources officielles'<br>• 'Pas ChatGPT — Du vrai droit'<br><br>Angle differenciant : confiance &amp; souverainete">
+    <rect class="node-rect" x="1140" y="274" width="204" height="52" fill="#1e1e2e" stroke="#34d399"/>
+    <text class="node-text" x="1242" y="294" fill="#6ee7b7" font-size="12">Ordalie</text>
+    <rect class="badge-bg" x="1198" y="304" width="88" height="18" fill="#065f46"/>
+    <text class="badge" x="1242" y="313" fill="#fff">6 annonces</text>
+  </g>
+
+  <!-- ============= RECOMMANDATIONS ============= -->
+  <g class="node-group" data-tooltip="<h3>RECOMMANDATIONS</h3>3 axes prioritaires pour JIMINI.AI<br>avec un budget de <span class='stat'>2k€/mois</span>">
+    <rect class="node-rect" x="968" y="652" width="164" height="56" fill="#78350f" stroke="#fbbf24"/>
+    <text class="node-text" x="1050" y="680" fill="#fef3c7" font-size="13">RECOMMANDATIONS</text>
+  </g>
+
+  <!-- Reco Meta -->
+  <g class="node-group" data-tooltip="<h3>Reco #1 — Meta</h3>S inspirer de Haiku (benchmark #1)<br><br>• Videos courtes + statiques comparatifs<br>• Angle souverainete des donnees (differenciant)<br>• Gain de temps concret (chiffre)<br>• CTA essai gratuit 14 jours<br>• Tester format webinaire<br><br>Budget suggere : ~800€/mois">
+    <rect class="node-rect" x="1130" y="564" width="200" height="52" fill="#1e1e2e" stroke="#fbbf24"/>
+    <text class="node-text" x="1230" y="584" fill="#fde68a" font-size="12">Meta : copier Haiku</text>
+    <text class="node-sub" x="1230" y="602" fill="#888">Video + souverainete</text>
+  </g>
+
+  <!-- Reco LinkedIn -->
+  <g class="node-group" data-tooltip="<h3>Reco #2 — LinkedIn</h3>S inspirer de Doctrine (lead magnets)<br><br>• Guide PDF teleechargeable<br>• Ex : 'Comment diviser par 3 votre temps de revue contractuelle'<br>• Webinaire sponsorise<br>• Cibler avocats + directions juridiques<br><br>Opportunite : 0 concurrent mid-market FR actif<br>Budget suggere : ~800€/mois">
+    <rect class="node-rect" x="1130" y="654" width="222" height="52" fill="#1e1e2e" stroke="#fbbf24"/>
+    <text class="node-text" x="1241" y="674" fill="#fde68a" font-size="12">LinkedIn : lead magnets</text>
+    <text class="node-sub" x="1241" y="692" fill="#888">Guides + webinaires</text>
+  </g>
+
+  <!-- Reco Google -->
+  <g class="node-group" data-tooltip="<h3>Reco #3 — Google Ads</h3>Approche progressive :<br><br>1. Protection de marque 'Jimini AI' (mini budget)<br>2. Mots-cles haute intention :<br>   • 'IA avocat'<br>   • 'assistant juridique IA'<br>   • 'copilote juridique'<br>3. Contrer l angle Ordalie (zero hallucination)<br>   avec la souverainete des donnees<br><br>Budget suggere : ~400€/mois">
+    <rect class="node-rect" x="1118" y="749" width="218" height="52" fill="#1e1e2e" stroke="#fbbf24"/>
+    <text class="node-text" x="1227" y="769" fill="#fde68a" font-size="12">Google : brand protect</text>
+    <text class="node-sub" x="1227" y="787" fill="#888">Marque + mots-cles intent</text>
+  </g>
+
+</svg>
+
+<div class="legend">
+  <h4>Legende</h4>
+  <div class="legend-row"><div class="legend-dot" style="background:#f472b6"></div> Meta (Facebook/Instagram)</div>
+  <div class="legend-row"><div class="legend-dot" style="background:#60a5fa"></div> LinkedIn</div>
+  <div class="legend-row"><div class="legend-dot" style="background:#34d399"></div> Google Ads</div>
+  <div class="legend-row"><div class="legend-dot" style="background:#fbbf24"></div> Recommandations</div>
+</div>
+
+<script>
+const tooltip = document.getElementById('tooltip');
+const groups = document.querySelectorAll('.node-group');
+
+groups.forEach(g => {
+  const tip = g.getAttribute('data-tooltip');
+  if (!tip) return;
+
+  g.addEventListener('mouseenter', (e) => {
+    tooltip.innerHTML = tip;
+    tooltip.classList.add('visible');
+  });
+
+  g.addEventListener('mousemove', (e) => {
+    let x = e.clientX + 16;
+    let y = e.clientY + 16;
+    if (x + 320 > window.innerWidth) x = e.clientX - 336;
+    if (y + 200 > window.innerHeight) y = e.clientY - 200;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  });
+
+  g.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('visible');
+  });
+});
+</script>
+
+</body>
+</html>
