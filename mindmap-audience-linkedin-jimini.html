@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JIMINI.AI — Audience LinkedIn Ads</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a12; color: #e0e0e0; overflow: hidden; width: 100vw; height: 100vh; }
+  svg { width: 100%; height: 100%; }
+  .node-group { cursor: default; }
+
+  .title-bar { position: fixed; top: 0; left: 0; right: 0; background: rgba(10,10,18,0.95); border-bottom: 1px solid #222; padding: 14px 24px; z-index: 10; display: flex; align-items: center; justify-content: space-between; }
+  .title-bar h1 { font-size: 16px; font-weight: 700; color: #fff; }
+  .title-bar span { font-size: 12px; color: #666; }
+
+  .legend { position: fixed; bottom: 20px; left: 20px; background: rgba(20,20,35,0.92); border: 1px solid #333; border-radius: 12px; padding: 16px 20px; font-size: 12px; z-index: 10; }
+  .legend h4 { color: #888; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; color: #bbb; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  .stat-box { position: fixed; top: 60px; right: 20px; background: rgba(20,20,35,0.92); border: 1px solid #333; border-radius: 12px; padding: 16px 20px; z-index: 10; text-align: center; }
+  .stat-box .number { font-size: 32px; font-weight: 800; color: #2E75B6; }
+  .stat-box .label { font-size: 11px; color: #888; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="title-bar">
+  <h1>JIMINI.AI — Audience LinkedIn Ads : Avocats & Services Juridiques < 10 pers.</h1>
+  <span>Aquilead • Mars 2026</span>
+</div>
+
+<div class="stat-box">
+  <div class="number">18 000</div>
+  <div class="label">membres dans l'audience</div>
+</div>
+
+<div class="legend">
+  <h4>Légende</h4>
+  <div class="legend-item"><div class="legend-dot" style="background:#2E75B6"></div> Audience cible</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#22C55E"></div> Inclusions (ET / OU)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div> Exclusions</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div> Catégories de postes</div>
+</div>
+
+<svg id="mindmap" viewBox="0 0 1600 1050">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <linearGradient id="grad-include" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22C55E;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#22C55E;stop-opacity:0.03"/>
+    </linearGradient>
+    <linearGradient id="grad-exclude" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF4444;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#EF4444;stop-opacity:0.03"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background zones -->
+  <ellipse cx="480" cy="520" rx="450" ry="420" fill="url(#grad-include)" opacity="0.5"/>
+  <ellipse cx="1200" cy="520" rx="380" ry="420" fill="url(#grad-exclude)" opacity="0.5"/>
+
+  <!-- Zone labels -->
+  <text x="200" y="85" fill="#22C55E" font-size="13" font-weight="700" opacity="0.5" letter-spacing="2">INCLUSIONS</text>
+  <text x="1120" y="85" fill="#EF4444" font-size="13" font-weight="700" opacity="0.5" letter-spacing="2">EXCLUSIONS</text>
+
+  <!-- ============================================ -->
+  <!-- CONNECTIONS FROM CENTER -->
+  <!-- ============================================ -->
+
+  <!-- Center to Inclusions -->
+  <path d="M 750,480 C 680,420 620,340 540,280" stroke="#22C55E" stroke-width="2.5" fill="none" opacity="0.5"/>
+  <path d="M 750,500 C 650,500 560,510 460,520" stroke="#22C55E" stroke-width="2.5" fill="none" opacity="0.5"/>
+  <path d="M 750,520 C 680,580 620,650 540,730" stroke="#22C55E" stroke-width="2.5" fill="none" opacity="0.5"/>
+
+  <!-- Center to Exclusions -->
+  <path d="M 840,470 C 920,380 1000,310 1060,260" stroke="#EF4444" stroke-width="2.5" fill="none" opacity="0.5"/>
+  <path d="M 840,500 C 940,500 1020,510 1080,520" stroke="#EF4444" stroke-width="2.5" fill="none" opacity="0.5"/>
+  <path d="M 840,530 C 920,610 1000,680 1060,740" stroke="#EF4444" stroke-width="2.5" fill="none" opacity="0.5"/>
+
+  <!-- Inclusion sub-connections: Postes to detail cards -->
+  <path d="M 540,280 C 440,260 380,240 300,210" stroke="#F59E0B" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="5,3"/>
+  <path d="M 540,280 C 440,310 380,340 280,370" stroke="#F59E0B" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="5,3"/>
+
+  <!-- Exclusion sub-connections -->
+  <path d="M 1060,260 C 1140,230 1200,200 1280,170" stroke="#F59E0B" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="5,3"/>
+  <path d="M 1060,260 C 1150,290 1220,320 1300,340" stroke="#F59E0B" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="5,3"/>
+  <path d="M 1060,740 C 1140,720 1200,700 1280,680" stroke="#F59E0B" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="5,3"/>
+  <path d="M 1060,740 C 1140,770 1200,800 1280,830" stroke="#F59E0B" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="5,3"/>
+
+  <!-- ============================================ -->
+  <!-- CENTER NODE -->
+  <!-- ============================================ -->
+  <g filter="url(#shadow)">
+    <rect x="710" y="448" width="170" height="104" rx="16" fill="#1A3C6E" stroke="#2E75B6" stroke-width="2.5"/>
+    <text x="795" y="478" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">AUDIENCE</text>
+    <text x="795" y="498" text-anchor="middle" fill="#8BAFD4" font-size="11" font-weight="600">LinkedIn Ads</text>
+    <text x="795" y="518" text-anchor="middle" fill="#5A8AB5" font-size="10">Avocats & Juridique</text>
+    <text x="795" y="538" text-anchor="middle" fill="#5A8AB5" font-size="10">< 10 personnes • France</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- INCLUSIONS -->
+  <!-- ============================================ -->
+
+  <!-- INCLUSION 1: Postes (actuels) -->
+  <g filter="url(#shadow)">
+    <rect x="420" y="240" width="240" height="80" rx="12" fill="#0C1A12" stroke="#22C55E" stroke-width="2"/>
+    <text x="540" y="266" text-anchor="middle" fill="#22C55E" font-size="10" font-weight="700" letter-spacing="1">INCLURE — POSTES (actuels)</text>
+    <text x="540" y="286" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">42 intitulés de poste</text>
+    <text x="540" y="304" text-anchor="middle" fill="#6DB88A" font-size="9">Opérateur : AU MOINS UN</text>
+  </g>
+
+  <!-- Poste detail 1: Avocats -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="148" width="340" height="100" rx="10" fill="#1A1A08" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="95" y="170" fill="#F59E0B" font-size="9" font-weight="700">AVOCATS & ASSOCIÉS</text>
+    <text x="95" y="188" fill="#ddd" font-size="9.5">Avocat, Avocat Senior, Avocat entreprise, Avocat</text>
+    <text x="95" y="202" fill="#ddd" font-size="9.5">associé, Associé, Associé gérant, Associé Cogérant,</text>
+    <text x="95" y="216" fill="#ddd" font-size="9.5">Associé Directeur Senior, Associé Principal Dirigeant,</text>
+    <text x="95" y="230" fill="#ddd" font-size="9.5">Avocat plaidant, Avocat général, Avocat principal,</text>
+    <text x="95" y="244" fill="#aaa" font-size="8.5">Avocat/avoué, Avocat à la cour, Avocat prud'hommes...</text>
+  </g>
+
+  <!-- Poste detail 2: Juristes & Conseillers -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="320" width="340" height="100" rx="10" fill="#1A1A08" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="95" y="342" fill="#F59E0B" font-size="9" font-weight="700">JURISTES & CONSEILLERS JURIDIQUES</text>
+    <text x="95" y="360" fill="#ddd" font-size="9.5">Juriste, Juriste junior, Juriste fiscaliste, Juriste</text>
+    <text x="95" y="374" fill="#ddd" font-size="9.5">d'entreprise, Juriste Senior, Conseiller juridique,</text>
+    <text x="95" y="388" fill="#ddd" font-size="9.5">Conseiller Juridique Principal, Conseiller en stratégies</text>
+    <text x="95" y="402" fill="#ddd" font-size="9.5">juridiques, Directeur Juridique, Responsable juridique,</text>
+    <text x="95" y="416" fill="#aaa" font-size="8.5">Chef service juridique, Consultant juridique, Assistant légal...</text>
+  </g>
+
+  <!-- INCLUSION 2: Taille entreprise -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="480" width="240" height="80" rx="12" fill="#0C1A12" stroke="#22C55E" stroke-width="2"/>
+    <text x="460" y="504" text-anchor="middle" fill="#22C55E" font-size="10" font-weight="700" letter-spacing="1">ET — TAILLE ENTREPRISE</text>
+    <text x="460" y="526" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Moi uniquement</text>
+    <text x="460" y="546" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">2-10 employés</text>
+  </g>
+
+  <!-- INCLUSION 3: Secteur -->
+  <g filter="url(#shadow)">
+    <rect x="400" y="700" width="280" height="70" rx="12" fill="#0C1A12" stroke="#22C55E" stroke-width="2"/>
+    <text x="540" y="724" text-anchor="middle" fill="#22C55E" font-size="10" font-weight="700" letter-spacing="1">ET — SECTEUR D'ACTIVITÉ</text>
+    <text x="540" y="746" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Services juridiques</text>
+    <text x="540" y="762" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Cabinets d'avocats</text>
+  </g>
+
+  <!-- Logic label between inclusions -->
+  <g>
+    <rect x="505" y="585" width="70" height="28" rx="14" fill="#22C55E" opacity="0.15"/>
+    <text x="540" y="604" text-anchor="middle" fill="#22C55E" font-size="11" font-weight="800">ET</text>
+  </g>
+  <path d="M 540,560 L 540,585" stroke="#22C55E" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M 540,613 L 540,700" stroke="#22C55E" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+  <g>
+    <rect x="505" y="378" width="70" height="28" rx="14" fill="#22C55E" opacity="0.15"/>
+    <text x="540" y="397" text-anchor="middle" fill="#22C55E" font-size="11" font-weight="800">ET</text>
+  </g>
+  <path d="M 540,320 L 540,378" stroke="#22C55E" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M 540,406 L 540,480" stroke="#22C55E" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+
+  <!-- ============================================ -->
+  <!-- EXCLUSIONS -->
+  <!-- ============================================ -->
+
+  <!-- EXCLUSION 1: Entreprise -->
+  <g filter="url(#shadow)">
+    <rect x="940" y="220" width="240" height="80" rx="12" fill="#1A0C0C" stroke="#EF4444" stroke-width="2"/>
+    <text x="1060" y="246" text-anchor="middle" fill="#EF4444" font-size="10" font-weight="700" letter-spacing="1">EXCLURE — ENTREPRISE</text>
+    <text x="1060" y="268" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Jimini AI</text>
+    <text x="1060" y="288" text-anchor="middle" fill="#D88888" font-size="9">Clients existants + employés</text>
+  </g>
+
+  <!-- Exclusion detail: Tailles exclues -->
+  <g filter="url(#shadow)">
+    <rect x="1180" y="130" width="300" height="80" rx="10" fill="#1A1010" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="1195" y="152" fill="#F59E0B" font-size="9" font-weight="700">TAILLES D'ENTREPRISE EXCLUES</text>
+    <text x="1195" y="172" fill="#ddd" font-size="10">11-50, 51-200, 201-500, 501-1000,</text>
+    <text x="1195" y="188" fill="#ddd" font-size="10">1001-5000, 5001-10 000, +10 000</text>
+    <text x="1195" y="204" fill="#aaa" font-size="8.5">→ Toutes les structures > 10 personnes</text>
+  </g>
+
+  <!-- Exclusion detail: Postes juridiques exclus -->
+  <g filter="url(#shadow)">
+    <rect x="1200" y="300" width="310" height="90" rx="10" fill="#1A1010" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="1215" y="322" fill="#F59E0B" font-size="9" font-weight="700">POSTES JURIDIQUES EXCLUS</text>
+    <text x="1215" y="340" fill="#ddd" font-size="9.5">Étudiant, Procureur, Clerc de notaire/greffier,</text>
+    <text x="1215" y="354" fill="#ddd" font-size="9.5">Greffier, Magistrat, Juge, Juge adjoint,</text>
+    <text x="1215" y="368" fill="#ddd" font-size="9.5">Juge de la Cour supérieure, Juge Associé,</text>
+    <text x="1215" y="382" fill="#aaa" font-size="8.5">Juge de paix, Juge-arbitre, Juge de District, Juge administratif</text>
+  </g>
+
+  <!-- EXCLUSION 2: Postes (main) -->
+  <g filter="url(#shadow)">
+    <rect x="960" y="480" width="240" height="80" rx="12" fill="#1A0C0C" stroke="#EF4444" stroke-width="2"/>
+    <text x="1080" y="504" text-anchor="middle" fill="#EF4444" font-size="10" font-weight="700" letter-spacing="1">EXCLURE — POSTES</text>
+    <text x="1080" y="526" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">+35 intitulés exclus</text>
+    <text x="1080" y="546" text-anchor="middle" fill="#D88888" font-size="9">Opérateur : AU MOINS UN</text>
+  </g>
+
+  <!-- EXCLUSION 3: Postes non-juridiques -->
+  <g filter="url(#shadow)">
+    <rect x="940" y="700" width="240" height="80" rx="12" fill="#1A0C0C" stroke="#EF4444" stroke-width="2"/>
+    <text x="1060" y="724" text-anchor="middle" fill="#EF4444" font-size="10" font-weight="700" letter-spacing="1">EXCLURE — POSTES</text>
+    <text x="1060" y="744" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Métiers non-juridiques</text>
+    <text x="1060" y="764" text-anchor="middle" fill="#D88888" font-size="9">Fonctions hors cible</text>
+  </g>
+
+  <!-- Exclusion detail: Non-juridiques 1 -->
+  <g filter="url(#shadow)">
+    <rect x="1200" y="640" width="310" height="80" rx="10" fill="#1A1010" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="1215" y="662" fill="#F59E0B" font-size="9" font-weight="700">FONCTIONS SUPPORT & ADMIN</text>
+    <text x="1215" y="680" fill="#ddd" font-size="9.5">Comptable, Personnel comptable, Finance,</text>
+    <text x="1215" y="694" fill="#ddd" font-size="9.5">Commercial, Ventes, Employé service clients,</text>
+    <text x="1215" y="708" fill="#aaa" font-size="8.5">Spécialiste RH, Employé en marketing, Stagiaire, Retraité</text>
+  </g>
+
+  <!-- Exclusion detail: Non-juridiques 2 -->
+  <g filter="url(#shadow)">
+    <rect x="1200" y="790" width="310" height="80" rx="10" fill="#1A1010" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="1215" y="812" fill="#F59E0B" font-size="9" font-weight="700">MÉTIERS SANS RAPPORT</text>
+    <text x="1215" y="830" fill="#ddd" font-size="9.5">Infirmier, Thérapeute, Designer, Artiste,</text>
+    <text x="1215" y="844" fill="#ddd" font-size="9.5">Dentaire, Garde d'enfants, Aliments et boissons,</text>
+    <text x="1215" y="858" fill="#aaa" font-size="8.5">Employé immobilier, Technicien, Médiateur, Propriétaire...</text>
+  </g>
+
+  <!-- Logic labels exclusions -->
+  <g>
+    <rect x="1045" y="370" width="70" height="28" rx="14" fill="#EF4444" opacity="0.15"/>
+    <text x="1080" y="389" text-anchor="middle" fill="#EF4444" font-size="11" font-weight="800">OU</text>
+  </g>
+  <path d="M 1060,300 L 1060,370" stroke="#EF4444" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <path d="M 1080,398 L 1080,480" stroke="#EF4444" stroke-width="1.5" fill="none" opacity="0.3"/>
+
+  <g>
+    <rect x="1045" y="610" width="70" height="28" rx="14" fill="#EF4444" opacity="0.15"/>
+    <text x="1080" y="629" text-anchor="middle" fill="#EF4444" font-size="11" font-weight="800">OU</text>
+  </g>
+  <path d="M 1080,560 L 1080,610" stroke="#EF4444" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <path d="M 1060,638 L 1060,700" stroke="#EF4444" stroke-width="1.5" fill="none" opacity="0.3"/>
+
+  <!-- ============================================ -->
+  <!-- STRUCTURE ANNOTATION -->
+  <!-- ============================================ -->
+  <g>
+    <rect x="620" y="870" width="360" height="85" rx="12" fill="rgba(20,20,35,0.8)" stroke="#444" stroke-width="1"/>
+    <text x="800" y="895" text-anchor="middle" fill="#2E75B6" font-size="11" font-weight="700">LOGIQUE DE L'AUDIENCE</text>
+    <text x="800" y="915" text-anchor="middle" fill="#ccc" font-size="10">(Poste avocat/juriste) ET (Taille 1-10) ET (Secteur juridique)</text>
+    <text x="800" y="935" text-anchor="middle" fill="#ccc" font-size="10">SAUF (Jimini AI OU Taille 11+ OU Postes non-cible)</text>
+    <text x="800" y="950" text-anchor="middle" fill="#888" font-size="9">= 18 000 membres qualifiés</text>
+  </g>
+
+</svg>
+
+</body>
+</html>
