@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP Landing Pages — Moovcare</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root {
+    --navy: #174869;
+    --sky: #45B3FF;
+    --gold: #F6C744;
+    --light-bg: #EEF7FE;
+    --red: #E84D3D;
+    --text: #1a1a2e;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --green: #059669;
+    --green-bg: #ecfdf5;
+    --red-bg: #fef2f2;
+    --orange-bg: #fff7ed;
+    --card-shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--text);
+    background: #f8fafc;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  nav .brand { color: #fff; font-weight: 800; font-size: 16px; letter-spacing: -.3px; }
+  nav .brand span { color: var(--gold); }
+  nav ul { list-style: none; display: flex; gap: 6px; }
+  nav a { color: rgba(255,255,255,.8); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 6px; transition: .2s; }
+  nav a:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+  /* ---- HERO ---- */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e5a82 100%);
+    color: #fff; text-align: center;
+    padding: 72px 24px 56px;
+  }
+  .hero h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 900; letter-spacing: -.5px; margin-bottom: 12px; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { font-size: 17px; opacity: .85; max-width: 600px; margin: 0 auto 24px; }
+  .hero .badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero .badge { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+
+  /* ---- CONTAINER ---- */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 48px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--navy); color: #fff; font-weight: 800; font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  h2 { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 20px; letter-spacing: -.3px; }
+  h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin: 28px 0 12px; }
+  h4 { font-size: 15px; font-weight: 700; color: var(--sky); margin: 20px 0 8px; }
+
+  p { margin-bottom: 12px; }
+
+  /* ---- CALLOUT ---- */
+  .callout {
+    border-radius: 10px; padding: 16px 20px;
+    font-weight: 600; font-size: 14px;
+    margin: 16px 0;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .callout.gold { background: #fef9e7; border-left: 4px solid var(--gold); color: var(--navy); }
+  .callout.orange { background: var(--orange-bg); border-left: 4px solid #f97316; color: #9a3412; }
+  .callout.blue { background: var(--light-bg); border-left: 4px solid var(--sky); color: var(--navy); }
+  .callout.green { background: var(--green-bg); border-left: 4px solid var(--green); color: #065f46; }
+
+  /* ---- NUMBERED LIST ---- */
+  ol.rules { counter-reset: rule; list-style: none; padding: 0; }
+  ol.rules li {
+    counter-increment: rule;
+    padding: 10px 0 10px 40px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  ol.rules li:last-child { border-bottom: none; }
+  ol.rules li::before {
+    content: counter(rule);
+    position: absolute; left: 0; top: 10px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--navy); color: #fff;
+    font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ---- BULLET LIST ---- */
+  ul.bullets { list-style: none; padding: 0; }
+  ul.bullets li { padding: 6px 0 6px 24px; position: relative; }
+  ul.bullets li::before { content: ''; position: absolute; left: 0; top: 14px; width: 8px; height: 3px; background: var(--sky); border-radius: 2px; }
+
+  /* ---- CHECKLIST ---- */
+  ul.checklist { list-style: none; padding: 0; }
+  ul.checklist li { padding: 8px 0 8px 32px; position: relative; border-bottom: 1px solid var(--border); font-size: 14px; }
+  ul.checklist li:last-child { border-bottom: none; }
+  ul.checklist li::before { content: '☐'; position: absolute; left: 4px; top: 8px; font-size: 16px; color: var(--muted); }
+
+  /* ---- TABLE ---- */
+  .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 10px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th { background: var(--navy); color: #fff; text-align: left; padding: 12px 16px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .5px; }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+
+  /* ---- COMPARE TABLE ---- */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 16px 0; }
+  .compare .col-bad { background: var(--red-bg); }
+  .compare .col-good { background: var(--green-bg); }
+  .compare .col-header { padding: 12px 16px; font-weight: 700; font-size: 13px; text-transform: uppercase; }
+  .compare .col-bad .col-header { color: #b91c1c; border-bottom: 2px solid #fca5a5; }
+  .compare .col-good .col-header { color: #065f46; border-bottom: 2px solid #6ee7b7; }
+  .compare .col-item { padding: 10px 16px; border-bottom: 1px solid rgba(0,0,0,.06); font-size: 14px; }
+
+  /* ---- PRICING CARDS ---- */
+  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .pricing-card {
+    border: 2px solid var(--border); border-radius: 12px; padding: 24px; text-align: center;
+    background: #fff; transition: .2s;
+  }
+  .pricing-card:hover { border-color: var(--sky); box-shadow: 0 4px 12px rgba(69,179,255,.15); }
+  .pricing-card h4 { color: var(--navy); font-size: 18px; margin: 0 0 8px; }
+  .pricing-card .price { font-size: 36px; font-weight: 900; color: var(--navy); }
+  .pricing-card .price span { font-size: 15px; font-weight: 500; color: var(--muted); }
+  .pricing-card ul { list-style: none; text-align: left; padding: 16px 0; font-size: 14px; }
+  .pricing-card li { padding: 5px 0; }
+  .pricing-card li::before { content: '✓ '; color: var(--green); font-weight: 700; }
+  .pricing-card .cta-btn { display: inline-block; background: var(--gold); color: var(--navy); font-weight: 700; padding: 10px 24px; border-radius: 8px; font-size: 14px; margin-top: 8px; }
+
+  /* ---- WIREFRAME TABLE ---- */
+  .wireframe { margin: 16px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .wireframe .wf-row { display: grid; grid-template-columns: 44px 160px 1fr; border-bottom: 1px solid var(--border); }
+  .wireframe .wf-row:last-child { border-bottom: none; }
+  .wireframe .wf-num { background: var(--navy); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .wireframe .wf-label { background: var(--light-bg); padding: 12px; font-weight: 700; font-size: 13px; color: var(--navy); display: flex; align-items: center; }
+  .wireframe .wf-content { padding: 12px 16px; font-size: 14px; line-height: 1.6; }
+
+  /* ---- LP TABS ---- */
+  .lp-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .lp-tab {
+    padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 14px;
+    cursor: pointer; border: 2px solid var(--border); background: #fff; transition: .2s;
+  }
+  .lp-tab:hover { border-color: var(--sky); }
+  .lp-tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .lp-content { display: none; }
+  .lp-content.active { display: block; }
+
+  /* ---- FIELD ---- */
+  .field { margin-bottom: 10px; }
+  .field .label { font-weight: 700; color: var(--navy); }
+  .field .value { }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center; padding: 32px 24px;
+    color: var(--muted); font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    .wireframe .wf-row { grid-template-columns: 36px 1fr; }
+    .wireframe .wf-label { display: none; }
+    .wireframe .wf-content::before { content: attr(data-label); font-weight: 700; color: var(--navy); display: block; margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">Moovcare<span>®</span> — SOP Landing Pages</div>
+  <ul>
+    <li><a href="#principes">Principes</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#wireframe">Wireframe</a></li>
+    <li><a href="#copies">Copies LP</a></li>
+    <li><a href="#ctb">Call-to-Benefit</a></li>
+    <li><a href="#quebec">Québec</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>SOP <span>Landing Pages</span></h1>
+  <p>Guide pratique pour créer vos landing pages de conversion — Marché Canada francophone, D2C Patient + Aidant</p>
+  <div class="badges">
+    <span class="badge">Structure Bulldozer 8 sections</span>
+    <span class="badge">Copies prêtes à intégrer</span>
+    <span class="badge">Checklist complète</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== SECTION 1 ==================== -->
+<section id="principes">
+  <div class="section-number">1</div>
+  <h2>Les 7 principes d'une landing page qui convertit</h2>
+
+  <div class="callout gold">⚠️ Règle d'or : 1 landing page = 1 promesse = 1 audience = 1 CTA</div>
+
+  <ol class="rules">
+    <li><strong>Un seul objectif.</strong> Pas de menu de navigation externe, pas de lien sortant, pas de distraction. Le visiteur fait UNE action : télécharger le guide gratuit ou s'abonner.</li>
+    <li><strong>Continuité du message (message match).</strong> Le titre de la LP reprend exactement le hook de la publicité. Si la pub dit « Les 5 erreurs qui mettent votre suivi cancer en danger », la LP répète ce titre mot pour mot.</li>
+    <li><strong>Preuve avant promesse.</strong> Montrez les résultats (+7,6 mois de survie, étude clinique) AVANT d'expliquer le produit. Le visiteur a besoin de croire avant de comprendre.</li>
+    <li><strong>Friction minimale.</strong> Le formulaire ne demande QUE le prénom et le courriel. Chaque champ supplémentaire coûte 10-15% de conversions.</li>
+    <li><strong>Mobile-first.</strong> 65-75% du trafic Meta Ads arrive sur mobile. Testez TOUJOURS votre LP sur téléphone avant de publier.</li>
+    <li><strong>Call-to-benefit, pas call-to-action.</strong> Le texte du bouton doit exprimer le bénéfice du clic, pas l'action. « Recevoir mon guide de survie gratuit » convertit mieux que « Télécharger ».</li>
+    <li><strong>Tuer le superflu.</strong> Chaque élément qui n'aide pas la conversion NUIT à la conversion. Liens inutiles, textes trop longs, blocks décoratifs sans but = à supprimer.</li>
+  </ol>
+</section>
+
+<!-- ==================== SECTION 2 ==================== -->
+<section id="process">
+  <div class="section-number">2</div>
+  <h2>Le process de création en 4 étapes</h2>
+  <p>Avant d'écrire le moindre mot, suivez ces 4 étapes dans l'ordre. Ce process est inspiré de la méthode Bulldozer (agence spécialisée landing pages, +200 LP déployées).</p>
+
+  <h3>Étape 1 : Répondre à 4 questions sur papier</h3>
+  <ul class="bullets">
+    <li><strong>Quel problème résolvez-vous ?</strong> Le silence entre deux rendez-vous, l'anxiété du patient, l'impuissance du proche aidant.</li>
+    <li><strong>Quel est le produit/service ?</strong> Moovcare : questionnaire hebdomadaire de 5 min qui alerte l'oncologue via IA si quelque chose change.</li>
+    <li><strong>À qui le vendez-vous ?</strong> Patient post-traitement (Lung) ou en traitement actif (Tox) + proche aidant. Québec francophone, 35-75 ans.</li>
+    <li><strong>Pourquoi c'est meilleur que les alternatives ?</strong> +7,6 mois de survie prouvés (JAMA). Proactif vs réactif. En français. Accessible directement sans prescription.</li>
+  </ul>
+
+  <h3>Étape 2 : Identifier vos messages clés</h3>
+  <ul class="bullets">
+    <li>Les 3 bénéfices principaux de Moovcare (détection précoce, paix d'esprit, lien avec l'oncologue)</li>
+    <li>Les cas d'usage concrets (questionnaire hebdomadaire, alerte temps réel, suivi depuis le téléphone)</li>
+    <li>Le process simplifié en 3 étapes maximum (remplir, analyser, alerter)</li>
+  </ul>
+
+  <h3>Étape 3 : Compléter les 8 sections avec le copy</h3>
+  <ul class="bullets">
+    <li>Privilégiez la clarté sur tout le reste. Un patient anxieux lit vite et veut comprendre immédiatement.</li>
+    <li>Mettez en image le bénéfice (mockup du guide, capture du questionnaire, graphique de survie).</li>
+    <li>Valorisez ce qui vous rend différent : étude JAMA, proactif, français, sans prescription.</li>
+  </ul>
+
+  <h3>Étape 4 : Optimiser après lancement</h3>
+  <ul class="bullets">
+    <li>Testez des CTA qui mettent en avant le bénéfice du clic (voir <a href="#ctb">Section Call-to-Benefit</a>).</li>
+    <li>Vérifiez que le header traite : le problème, la solution, l'audience, la réassurance.</li>
+    <li>Mesurez votre score de vitesse (GTMetrix, viser la note A). Une page lente tue la conversion.</li>
+    <li>Installez un outil de heatmap (Hotjar, Microsoft Clarity) pour voir où les visiteurs décrochent.</li>
+  </ul>
+</section>
+
+<!-- ==================== SECTION 3 ==================== -->
+<section id="benchmarks">
+  <div class="section-number">3</div>
+  <h2>Benchmarks de conversion</h2>
+  <p>Ces chiffres vous permettent de juger la performance de vos LP après lancement.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Type de LP</th><th>Moyen</th><th>Bon</th><th>Excellent</th></tr></thead>
+      <tbody>
+        <tr><td>LP Guide gratuit (TOFU)</td><td>20-30%</td><td><strong>35%</strong></td><td style="color:var(--green);font-weight:700;">45%+</td></tr>
+        <tr><td>LP Essai / Abonnement (BOFU)</td><td>8-15%</td><td><strong>20%</strong></td><td style="color:var(--green);font-weight:700;">25%+</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== SECTION 4 ==================== -->
+<section id="lps">
+  <div class="section-number">4</div>
+  <h2>Les 3 landing pages à créer</h2>
+  <p>Chaque angle publicitaire a sa propre landing page dédiée. Le visiteur qui clique sur une pub « Les 5 erreurs » doit arriver sur une page qui parle des 5 erreurs, jamais sur une page générique Moovcare.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>LP</th><th>Angle / Guide</th><th>Cible</th><th>Produit</th><th>CTA</th></tr></thead>
+      <tbody>
+        <tr><td><strong>LP 1</strong></td><td>Les 5 erreurs qui mettent votre suivi cancer en danger</td><td>Patient post-traitement, 45-75 ans</td><td>Lung (39$/m)</td><td>Guide gratuit</td></tr>
+        <tr><td><strong>LP 2</strong></td><td>Comment 5 min/semaine ont ajouté 7,6 mois de survie</td><td>Patient en rémission, anxieux, 40-70 ans</td><td>Lung (39$/m)</td><td>Guide gratuit</td></tr>
+        <tr><td><strong>LP 3</strong></td><td>Guide du proche aidant : 7 actions concrètes</td><td>Proche aidant, conjoint/enfant adulte, 35-65 ans</td><td>Lung ou Tox</td><td>Guide gratuit</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== SECTION 5 ==================== -->
+<section id="wireframe">
+  <div class="section-number">5</div>
+  <h2>Structure Bulldozer en 8 sections (wireframe)</h2>
+  <p>Cette structure est inspirée du template Bulldozer qui obtient les meilleurs taux de conversion. Respectez cet ordre exactement.</p>
+
+  <div class="callout orange">⚠️ La navigation est uniquement on-page (ancres vers les sections). Aucun lien externe, aucun menu vers d'autres pages.</div>
+
+  <div class="wireframe">
+    <div class="wf-row">
+      <div class="wf-num">1</div>
+      <div class="wf-label">NAVIGATION</div>
+      <div class="wf-content" data-label="NAVIGATION">Barre fixe en haut. Logo Moovcare à gauche. Liens ancres vers les sections principales (Bénéfices, Tarifs, Témoignages). UN SEUL bouton CTA à droite. PAS de menu vers d'autres pages.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">2</div>
+      <div class="wf-label">HEADER / HERO</div>
+      <div class="wf-content" data-label="HEADER / HERO">Headline (reprend le titre du guide mot pour mot) + Sous-headline (1 phrase de promesse) + Mockup 3D du guide à droite + Formulaire (Prénom + Courriel) + Bouton CTA doré #F6C744 avec <strong>CALL-TO-BENEFIT</strong> + Micro-preuve sous le bouton. Le header doit répondre à 4 questions : c'est quoi, à qui, pourquoi c'est top, pourquoi vous croire.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">3</div>
+      <div class="wf-label">RÉASSURANCE N1</div>
+      <div class="wf-content" data-label="RÉASSURANCE N1">Bande horizontale avec les preuves sociales immédiates : logo JAMA, chiffre +7,6 mois, mention « Étude clinique randomisée », nombre de patients, logo Sivan/Moovcare. Objectif : rassurer en 2 secondes.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">4</div>
+      <div class="wf-label">BÉNÉFICES</div>
+      <div class="wf-content" data-label="BÉNÉFICES / FEATURES">3 bénéfices principaux, chacun avec : titre orienté résultat + description 2-3 lignes + visuel (capture, icône) + bouton CALL-TO-BENEFIT sous chaque bénéfice.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">5</div>
+      <div class="wf-label">OFFRES / PRICING</div>
+      <div class="wf-content" data-label="OFFRES / PRICING">2 offres côte à côte : Moovcare Lung (39$/mois) et Moovcare Tox (59$/mois). Nommer les plans par usage. Chaque offre = liste des inclus + CTA dédié. Mention « Sans engagement, annulation en 1 clic ».</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">6</div>
+      <div class="wf-label">RÉASSURANCE N2</div>
+      <div class="wf-content" data-label="RÉASSURANCE N2">Témoignages de patients/aidants (citations avec prénom, âge, situation). Use cases concrets. Awards ou mentions presse si disponibles. Objectif : lever les dernières hésitations.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">7</div>
+      <div class="wf-label">FAQ / OBJECTIONS</div>
+      <div class="wf-content" data-label="FAQ / OBJECTIONS">5-7 questions en accordéon. Répondre aux objections clés : RAMQ/couverture, sécurité des données, annulation, différence avec le suivi hospitalier. Max 3 phrases par réponse.</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-num">8</div>
+      <div class="wf-label">RAPPEL CTA</div>
+      <div class="wf-content" data-label="RAPPEL CTA">Répétition de la proposition de valeur + bouton CALL-TO-BENEFIT identique au hero + « Gratuit, aucun engagement, désabonnement en 1 clic ». Footer minimal : mentions légales, confidentialité.</div>
+    </div>
+  </div>
+
+  <div class="callout blue">💡 Call-to-benefit : le texte du bouton exprime le bénéfice du clic. « Recevoir mon guide de survie gratuit » > « Télécharger ». « Commencer à surveiller mon cancer » > « S'inscrire ».</div>
+</section>
+
+<!-- ==================== SECTION 6 ==================== -->
+<section id="copies">
+  <div class="section-number">6</div>
+  <h2>Copy prêt à intégrer par LP</h2>
+
+  <div class="lp-tabs">
+    <div class="lp-tab active" onclick="showLP(1)">LP 1 — Les 5 erreurs</div>
+    <div class="lp-tab" onclick="showLP(2)">LP 2 — Le Questionnaire</div>
+    <div class="lp-tab" onclick="showLP(3)">LP 3 — Proches Aidants</div>
+  </div>
+
+  <!-- LP 1 -->
+  <div class="lp-content active" id="lp1">
+    <h3>Section 2 : Header / Hero</h3>
+    <div class="field"><span class="label">Headline : </span><span class="value">Les 5 erreurs qui mettent votre suivi cancer en danger.</span></div>
+    <div class="field"><span class="label">Headline A/B test : </span><span class="value">Entre deux rendez-vous, qui surveille vraiment votre cancer ?</span></div>
+    <div class="field"><span class="label">Sous-headline : </span><span class="value">80% des patients en rémission font ces erreurs sans le savoir. Ce guide gratuit vous montre lesquelles, et le rituel de 5 minutes qui peut tout changer.</span></div>
+    <div class="field"><span class="label">CTA bouton (call-to-benefit) : </span><span class="value" style="color:var(--navy);font-weight:700;">RECEVOIR MON GUIDE DE SURVIE GRATUIT</span></div>
+    <div class="field"><span class="label">CTA A/B test : </span><span class="value" style="font-weight:600;">DÉCOUVRIR LES 5 ERREURS À ÉVITER</span></div>
+    <div class="field"><span class="label">Micro-preuve : </span><span class="value">+7,6 mois de survie prouvés par une étude clinique randomisée (JAMA)</span></div>
+    <div class="field"><span class="label">Visuel : </span><span class="value">Mockup 3D du guide gratuit (couverture visible) + illustration d'un patient serein avec son téléphone.</span></div>
+
+    <h3>Section 3 : Réassurance n1</h3>
+    <p>Bande horizontale : Logo Moovcare + « Étude JAMA » + « +7,6 mois de survie » + « Utilisé par des centaines de patients » + « Dispositif médical certifié »</p>
+
+    <h3>Section 4 : Bénéfices (ce que vous allez apprendre)</h3>
+    <ul class="bullets">
+      <li><strong>Détection précoce :</strong> Les 5 signaux que vous ignorez peut-être entre deux rendez-vous, et que votre médecin ne voit pas à distance.</li>
+      <li><strong>Un rituel simple :</strong> 5 minutes par semaine, un questionnaire depuis votre téléphone, et une IA qui analyse vos réponses en temps réel.</li>
+      <li><strong>Alerte automatique :</strong> Si quelque chose change, votre oncologue est alerté immédiatement. Pas dans 3 mois au prochain rendez-vous.</li>
+      <li><strong>Paix d'esprit :</strong> Pourquoi un questionnaire simple peut détecter une rechute plus vite qu'un scanner planifié.</li>
+      <li><strong>Preuves cliniques :</strong> Comment des centaines de patients utilisent déjà cet outil au quotidien avec des résultats mesurables.</li>
+    </ul>
+
+    <h3>Section 5 : Offres / Pricing</h3>
+    <p><em>Sur la LP guide gratuit, cette section est optionnelle. Si vous l'incluez, présentez-la comme une « étape suivante » après le téléchargement.</em></p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h4>Moovcare Lung</h4>
+        <div class="price">39$<span> / mois</span></div>
+        <ul>
+          <li>Suivi post-traitement cancer du poumon</li>
+          <li>Questionnaire hebdomadaire de 5 min</li>
+          <li>Alerte IA à votre oncologue</li>
+          <li>Tableau de bord de suivi</li>
+          <li>Sans engagement, annulation en 1 clic</li>
+        </ul>
+        <div class="cta-btn">COMMENCER MON SUIVI</div>
+      </div>
+      <div class="pricing-card">
+        <h4>Moovcare Tox</h4>
+        <div class="price">59$<span> / mois</span></div>
+        <ul>
+          <li>Suivi pendant traitement actif (chimio, immuno)</li>
+          <li>Questionnaire adapté aux effets secondaires</li>
+          <li>Alerte IA immédiate si toxicité détectée</li>
+          <li>Communication directe avec l'équipe médicale</li>
+          <li>Sans engagement, annulation en 1 clic</li>
+        </ul>
+        <div class="cta-btn">COMMENCER MON SUIVI</div>
+      </div>
+    </div>
+
+    <h3>Section 6 : Réassurance n2 (témoignages suggérés)</h3>
+    <p>Demandez à 2-3 patients de partager leur expérience. Format idéal :</p>
+    <ul class="bullets">
+      <li>Citation entre guillemets (2-3 phrases maximum)</li>
+      <li>Prénom, âge, situation (« Marc, 62 ans, en rémission depuis 8 mois »)</li>
+      <li>Résultat concret (« Mon oncologue a détecté un changement 6 semaines avant mon scanner prévu »)</li>
+    </ul>
+
+    <h3>Section 7 : FAQ</h3>
+    <div class="field"><span class="label">Q : Est-ce que Moovcare remplace mon oncologue ? </span><span class="value">R : Non. Moovcare est un complément. Votre questionnaire hebdomadaire est analysé par une IA qui alerte votre médecin si quelque chose change. Votre suivi médical habituel continue normalement.</span></div>
+    <div class="field"><span class="label">Q : Pourquoi payer si l'hôpital offre déjà un suivi ? </span><span class="value">R : Le suivi hospitalier (IPO) est espacé et réactif. Votre infirmière pivot est souvent surchargée. Moovcare surveille en continu et alerte AVANT que les symptômes ne s'aggravent.</span></div>
+    <div class="field"><span class="label">Q : Est-ce couvert par la RAMQ ? </span><span class="value">R : Moovcare n'est pas encore couvert par la RAMQ. C'est un investissement direct de 39$ ou 59$/mois dans votre santé, sans engagement. Moins qu'un souper au restaurant.</span></div>
+    <div class="field"><span class="label">Q : Mes données sont-elles protégées ? </span><span class="value">R : Oui. Moovcare est un dispositif médical certifié conforme aux normes de protection des données de santé. Vos réponses sont chiffrées et accessibles uniquement par vous et votre équipe médicale.</span></div>
+    <div class="field"><span class="label">Q : Puis-je annuler mon abonnement ? </span><span class="value">R : Oui, à tout moment, en 1 clic. Sans frais d'annulation, sans engagement.</span></div>
+
+    <h3>Section 8 : Rappel CTA</h3>
+    <div class="field"><span class="label">Headline : </span><span class="value">Votre suivi cancer mérite mieux que le silence entre deux rendez-vous.</span></div>
+    <div class="field"><span class="label">CTA bouton : </span><span class="value" style="font-weight:700;">RECEVOIR MON GUIDE DE SURVIE GRATUIT</span></div>
+    <div class="field"><span class="label">Réassurance : </span><span class="value">Gratuit, aucun engagement, désabonnement en 1 clic.</span></div>
+  </div>
+
+  <!-- LP 2 -->
+  <div class="lp-content" id="lp2">
+    <h3>Section 2 : Header / Hero</h3>
+    <div class="field"><span class="label">Headline : </span><span class="value">Comment un questionnaire de 5 minutes peut transformer votre suivi cancer.</span></div>
+    <div class="field"><span class="label">Headline A/B test : </span><span class="value">+7,6 mois de survie. 5 minutes par semaine. Prouvé cliniquement.</span></div>
+    <div class="field"><span class="label">Sous-headline : </span><span class="value">Découvrez l'outil validé par une étude du JAMA, utilisé par des centaines de patients pour reprendre le contrôle de leur suivi, depuis leur téléphone.</span></div>
+    <div class="field"><span class="label">CTA bouton (call-to-benefit) : </span><span class="value" style="color:var(--navy);font-weight:700;">DÉCOUVRIR COMMENT GAGNER 7,6 MOIS</span></div>
+    <div class="field"><span class="label">CTA A/B test : </span><span class="value" style="font-weight:600;">RECEVOIR LE GUIDE GRATUIT DU QUESTIONNAIRE</span></div>
+    <div class="field"><span class="label">Micro-preuve : </span><span class="value">Étude clinique randomisée publiée dans le JAMA</span></div>
+
+    <h3>Section 3 : Réassurance n1</h3>
+    <p>Bande : « Publié dans le JAMA » + « -67% de mortalité » + « 5 min/semaine » + « Utilisé dans 30+ hôpitaux »</p>
+
+    <h3>Section 4 : Bénéfices</h3>
+    <ul class="bullets">
+      <li><strong>12 questions, des réponses vitales :</strong> Comment 12 questions simples peuvent détecter une rechute avant les symptômes visibles.</li>
+      <li><strong>Plus rapide qu'un scanner planifié :</strong> L'IA qui analyse vos réponses repère les changements en temps réel, pas dans 3 mois.</li>
+      <li><strong>Preuves irréfutables :</strong> L'étude clinique qui a prouvé +7,6 mois de survie, résumée simplement dans le guide.</li>
+      <li><strong>Démarrage instantané :</strong> Commencez en 30 secondes depuis votre téléphone. Aucune installation compliquée.</li>
+      <li><strong>Un coût transparent :</strong> Moins qu'un souper au restaurant par mois, pour une surveillance continue de votre santé.</li>
+    </ul>
+
+    <h3>Section 4 bis : Comment ça marche</h3>
+    <ol class="rules">
+      <li>Vous remplissez 12 questions simples chaque semaine (5 minutes, depuis votre téléphone ou votre ordinateur).</li>
+      <li>Une intelligence artificielle analyse vos réponses et détecte les signaux faibles que vous pourriez ne pas remarquer.</li>
+      <li>Si quelque chose change, votre oncologue reçoit une alerte en temps réel. Pas dans 3 mois. Maintenant.</li>
+    </ol>
+
+    <h3>Section 8 : Rappel CTA</h3>
+    <div class="field"><span class="label">Headline : </span><span class="value">5 minutes par semaine. C'est tout ce qu'il faut pour reprendre le contrôle.</span></div>
+    <div class="field"><span class="label">CTA bouton : </span><span class="value" style="font-weight:700;">DÉCOUVRIR COMMENT GAGNER 7,6 MOIS</span></div>
+    <div class="field"><span class="label">Réassurance : </span><span class="value">Guide gratuit, aucun engagement, désabonnement en 1 clic.</span></div>
+  </div>
+
+  <!-- LP 3 -->
+  <div class="lp-content" id="lp3">
+    <h3>Section 2 : Header / Hero</h3>
+    <div class="field"><span class="label">Headline : </span><span class="value">Vous ne pouvez pas guérir votre proche. Mais vous pouvez veiller sur lui.</span></div>
+    <div class="field"><span class="label">Headline A/B test : </span><span class="value">7 actions concrètes pour accompagner un proche atteint de cancer.</span></div>
+    <div class="field"><span class="label">Sous-headline : </span><span class="value">Ce guide a été écrit pour ceux qui se sentent impuissants face au cancer d'un être cher. Découvrez comment passer de spectateur à acteur de son suivi.</span></div>
+    <div class="field"><span class="label">CTA bouton (call-to-benefit) : </span><span class="value" style="color:var(--navy);font-weight:700;">RECEVOIR MES 7 ACTIONS CONCRÈTES</span></div>
+    <div class="field"><span class="label">CTA A/B test : </span><span class="value" style="font-weight:600;">AIDER MON PROCHE DÈS AUJOURD'HUI</span></div>
+    <div class="field"><span class="label">Micro-preuve : </span><span class="value">-67% de mortalité quand le patient est suivi activement (JAMA)</span></div>
+
+    <h3>Section 3 : Réassurance n1</h3>
+    <p>Bande : « -67% de mortalité » + « +7,6 mois de survie » + « Étude clinique JAMA » + « Suivi proactif 24h/24 »</p>
+
+    <h3>Section 4 : Bénéfices</h3>
+    <ul class="bullets">
+      <li><strong>7 actions concrètes :</strong> Les gestes que les proches aidants peuvent poser au quotidien pour changer la donne.</li>
+      <li><strong>Surveillance continue :</strong> Comment un questionnaire de 5 minutes par semaine surveille les symptômes à votre place.</li>
+      <li><strong>Alertes en temps réel :</strong> L'oncologue est prévenu immédiatement si quelque chose change, pas au prochain rendez-vous dans 3 mois.</li>
+      <li><strong>Les signaux à connaître :</strong> Les alertes que vous devez reconnaître en tant que proche pour réagir vite.</li>
+      <li><strong>Reprendre un rôle actif :</strong> Comment retrouver un rôle concret face à la maladie quand on se sent impuissant.</li>
+    </ul>
+
+    <h3>Section 7 : FAQ spécifiques aidants</h3>
+    <div class="field"><span class="label">Q : C'est moi qui dois remplir le questionnaire ? </span><span class="value">R : Non. C'est votre proche (le patient) qui répond aux 12 questions chaque semaine. Vous pouvez l'aider, mais c'est lui qui décrit ses symptômes.</span></div>
+    <div class="field"><span class="label">Q : Est-ce que je recevrai les alertes ? </span><span class="value">R : Moovcare alerte l'équipe médicale directement. Votre proche peut choisir de partager son suivi avec vous.</span></div>
+    <div class="field"><span class="label">Q : Mon proche refuse de s'inscrire. Que faire ? </span><span class="value">R : Téléchargez le guide ensemble. Souvent, comprendre les résultats cliniques (+7,6 mois de survie) suffit à convaincre.</span></div>
+    <div class="field"><span class="label">Q : C'est combien ? </span><span class="value">R : 39$/mois (post-traitement) ou 59$/mois (traitement actif). Sans engagement. Moins qu'un souper au restaurant.</span></div>
+
+    <h3>Section 8 : Rappel CTA</h3>
+    <div class="field"><span class="label">Headline : </span><span class="value">Vous ne pouvez pas tout contrôler. Mais vous pouvez faire quelque chose de concret dès maintenant.</span></div>
+    <div class="field"><span class="label">CTA bouton : </span><span class="value" style="font-weight:700;">RECEVOIR MES 7 ACTIONS CONCRÈTES</span></div>
+    <div class="field"><span class="label">Réassurance : </span><span class="value">Guide gratuit, aucun engagement, désabonnement en 1 clic.</span></div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 7 ==================== -->
+<section id="quebec">
+  <div class="section-number">7</div>
+  <h2>Adapter la langue pour le Québec</h2>
+
+  <div class="callout orange">⚠️ Le ton des landing pages est VOUVOIEMENT (contrairement aux pubs Meta qui tutoient).</div>
+
+  <p>Les landing pages s'adressent à un public fragile (patients cancer, proches aidants). Le vouvoiement apporte le respect et la crédibilité nécessaires.</p>
+
+  <h3>Vocabulaire québécois à respecter</h3>
+  <div class="compare">
+    <div class="col-bad">
+      <div class="col-header">NE PAS UTILISER</div>
+      <div class="col-item">email</div>
+      <div class="col-item">déjeuner/dîner</div>
+      <div class="col-item">du coup</div>
+      <div class="col-item">euros / €</div>
+      <div class="col-item">portable</div>
+      <div class="col-item">livre blanc</div>
+      <div class="col-item">médecin traitant</div>
+      <div class="col-item">sécurité sociale / sécu</div>
+    </div>
+    <div class="col-good">
+      <div class="col-header">UTILISER</div>
+      <div class="col-item">courriel</div>
+      <div class="col-item">dîner/souper</div>
+      <div class="col-item">alors / donc</div>
+      <div class="col-item">dollars / $</div>
+      <div class="col-item">cellulaire / téléphone</div>
+      <div class="col-item">guide gratuit</div>
+      <div class="col-item">médecin de famille / oncologue</div>
+      <div class="col-item">RAMQ / régime public</div>
+    </div>
+  </div>
+
+  <h3>Ton général</h3>
+  <ul class="bullets">
+    <li>Chaleureux, direct, jamais institutionnel ou froid.</li>
+    <li>Pas de jargon médical inutile. Si un terme technique est nécessaire, l'expliquer en 5 mots entre parenthèses.</li>
+    <li>Phrases courtes (15 mots max). Paragraphes de 3 lignes max.</li>
+    <li>Évitez les superlatifs (« révolutionnaire », « unique au monde »). Laissez les chiffres parler (+7,6 mois, -67%).</li>
+  </ul>
+</section>
+
+<!-- ==================== SECTION 8 ==================== -->
+<section id="ctb">
+  <div class="section-number">8</div>
+  <h2>Guide des Call-to-Benefit</h2>
+
+  <div class="callout blue">💡 Principe : le texte du bouton doit exprimer ce que le visiteur GAGNE en cliquant, pas l'action technique qu'il effectue.</div>
+
+  <p>Un bon CTA répond à la question du visiteur : « Qu'est-ce que je gagne si je clique ? ». Un mauvais CTA décrit l'action mécanique.</p>
+
+  <div class="compare">
+    <div class="col-bad">
+      <div class="col-header">Call-to-action (générique)</div>
+      <div class="col-item">Télécharger</div>
+      <div class="col-item">S'inscrire</div>
+      <div class="col-item">En savoir plus</div>
+      <div class="col-item">Essayer gratuitement</div>
+      <div class="col-item">Soumettre</div>
+      <div class="col-item">Commander</div>
+    </div>
+    <div class="col-good">
+      <div class="col-header">Call-to-benefit (convertit mieux)</div>
+      <div class="col-item">Recevoir mon guide de survie gratuit</div>
+      <div class="col-item">Commencer à surveiller mon cancer</div>
+      <div class="col-item">Découvrir comment gagner 7,6 mois</div>
+      <div class="col-item">Protéger mon proche dès maintenant</div>
+      <div class="col-item">Recevoir mes 7 actions concrètes</div>
+      <div class="col-item">Commencer mon suivi pour 39$/mois</div>
+    </div>
+  </div>
+
+  <h3>Règles des CTA</h3>
+  <ul class="bullets">
+    <li>Un seul CTA principal par page (répété en hero et en bas). Optionnel : un CTA secondaire plus doux (« En savoir plus ») pour les hésitants.</li>
+    <li>Couleur du bouton principal : jaune doré <strong>#F6C744</strong> avec texte navy <strong>#174869</strong> (contraste maximum).</li>
+    <li>Le bouton doit être assez large pour être tapé au pouce sur mobile (minimum 48px de hauteur).</li>
+    <li>Texte de réassurance sous chaque bouton : « Gratuit, aucun engagement » ou « Sans carte bancaire ».</li>
+    <li>A/B testez 2 formulations de CTA dès le lancement. Attendez 100+ clics par version avant de conclure.</li>
+  </ul>
+</section>
+
+<!-- ==================== SECTION 9 ==================== -->
+<section id="checklist">
+  <div class="section-number">9</div>
+  <h2>Checklist avant mise en ligne</h2>
+  <p>Vérifiez chaque point avant de publier une landing page :</p>
+
+  <h3>Contenu</h3>
+  <ul class="checklist">
+    <li>Le headline reprend exactement le titre de la pub (message match)</li>
+    <li>Le header répond aux 4 questions : c'est quoi, à qui, pourquoi c'est top, pourquoi vous croire</li>
+    <li>Le mockup 3D du guide est visible dans la hero section</li>
+    <li>La preuve clinique (+7,6 mois / -67%) apparaît au-dessus du fold (Réassurance n1)</li>
+    <li>Les 8 sections Bulldozer sont présentes dans l'ordre</li>
+    <li>Le CTA est un call-to-benefit (pas juste « Télécharger »)</li>
+    <li>Le formulaire ne demande QUE prénom + courriel (2 champs)</li>
+    <li>Le texte est en vouvoiement (pas de tutoiement sur la LP)</li>
+    <li>Le vocabulaire est québécois (« courriel », « $ », pas de « du coup »)</li>
+    <li>La FAQ répond à l'objection RAMQ</li>
+    <li>La section Pricing affiche les 2 offres (Lung 39$ / Tox 59$) avec « sans engagement »</li>
+  </ul>
+
+  <h3>Technique</h3>
+  <ul class="checklist">
+    <li>La page charge en moins de 3 secondes (score GTMetrix : viser A)</li>
+    <li>Le CTA est visible sans scroller (au-dessus du fold sur mobile)</li>
+    <li>Le formulaire fonctionne (tester un envoi réel)</li>
+    <li>Le pixel Meta est installé et fire l'event « Lead » à la soumission</li>
+    <li>Le tracking Google Ads est installé (conversion « Lead »)</li>
+    <li>L'URL est propre (ex: moovcare-patient.com/guide-5-erreurs)</li>
+    <li>La page de remerciement est configurée avec le lien du PDF</li>
+    <li>Aucun lien externe, aucun menu sortant, aucun footer avec liens</li>
+    <li>La navigation on-page fonctionne (ancres vers les sections)</li>
+    <li>Hotjar ou Microsoft Clarity est installé (heatmaps)</li>
+  </ul>
+
+  <h3>A/B Testing</h3>
+  <ul class="checklist">
+    <li>2 versions de headline prêtes (A/B test)</li>
+    <li>2 versions de CTA button prêtes (call-to-benefit A/B test)</li>
+    <li>Minimum 100 visites par version avant de conclure</li>
+    <li>Comparer : taux de conversion = téléchargements / visites</li>
+    <li>Itérer chaque semaine : tester un nouvel élément à la fois</li>
+  </ul>
+</section>
+
+</div>
+
+<footer>
+  Préparé par AquiLeadz — Avril 2026 — Version 2.0
+</footer>
+
+<script>
+function showLP(n) {
+  document.querySelectorAll('.lp-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.lp-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.lp-tab')[n-1].classList.add('active');
+  document.getElementById('lp'+n).classList.add('active');
+}
+</script>
+</body>
+</html>
